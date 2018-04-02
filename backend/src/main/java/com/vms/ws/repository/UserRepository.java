@@ -18,8 +18,8 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long> {
     @Query(value = "SELECT u FROM User u WHERE  u.username= :username and u.password=:password and u.role.id = :roleId")
     User validateUser(@Param("username") String username, @Param("password") String password, @Param("roleId") Long roleId);
 
-    @Query(value = "SELECT u FROM User u WHERE  u.driverDetails.id = :driverId and u.password=:password ")
-    User validate(@Param("driverId") Long username, @Param("password") String password);
+    /*@Query(value = "SELECT u FROM User u WHERE  u.driverDetails.id = :driverId and u.password=:password ")
+    User validate(@Param("driverId") Long username, @Param("password") String password);*/
 
     User save(User user);
 

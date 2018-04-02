@@ -36,9 +36,9 @@ public class UserService implements UserNameValidator {
             return userRepository.validateUser(username, password, roleId);
     }
 
-    public User validateByDriverIdAndPassword(Long driverId, String password) {
+    /*public User validateByDriverIdAndPassword(Long driverId, String password) {
         return userRepository.validate(driverId, password);
-    }
+    }*/
 
     @Transactional
     public void save(User user) {
