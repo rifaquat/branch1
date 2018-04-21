@@ -13,6 +13,28 @@ public class ServerResponse<T> {
     private Integer code;
     private T result;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Long iTotalRecords;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Long iTotalDisplayRecords;
+
+    public Long getiTotalRecords() {
+        return iTotalRecords;
+    }
+
+    public void setiTotalRecords(Long iTotalRecords) {
+        this.iTotalRecords = iTotalRecords;
+    }
+
+    public Long getiTotalDisplayRecords() {
+        return iTotalDisplayRecords;
+    }
+
+    public void setiTotalDisplayRecords(Long iTotalDisplayRecords) {
+        this.iTotalDisplayRecords = iTotalDisplayRecords;
+    }
+
     public T getMessage() {
         return message;
     }

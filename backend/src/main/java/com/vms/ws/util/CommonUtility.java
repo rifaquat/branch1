@@ -1,8 +1,14 @@
 package com.vms.ws.util;
 
+import com.google.gson.Gson;
 import com.vms.ws.config.ApplicationConfig;
+import com.vms.ws.controller.web.rest.UserMobileController;
+import com.vms.ws.model.ServerResponse;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
@@ -21,13 +27,19 @@ import java.util.TimeZone;
 @Service
 public class CommonUtility<T> {
 
+    private final static Logger logger = Logger.getLogger(CommonUtility.class);
+
     @Autowired
     ApplicationConfig applicationConfig;
 
     @Autowired
     HttpServletRequest httpServletRequest;
 
-    public Integer generatePassword(){
+    @Autowired
+    Gson gson;
+
+
+    public Integer generatePassword() {
         return new Random().nextInt(900000) + 100000;
     }
 
@@ -66,7 +78,7 @@ public class CommonUtility<T> {
         return (String)httpServletRequest.getSession().getAttribute(GeneralConstants.LOGGED_IN_OBJECT_KEY);
     }*/
 
-    public String encryptData(String data,Key key) {
+    public String encryptData(String data, Key key) {
         String cipherText = "";
         try {
             Cipher aesCipher = Cipher.getInstance("DESede");
@@ -80,7 +92,7 @@ public class CommonUtility<T> {
         return cipherText;
     }
 
-    public String decryptText(String data,Key key) {
+    public String decryptText(String data, Key key) {
         String decryptedText = "";
         try {
             Cipher aesCipher = Cipher.getInstance("DESede");
@@ -94,15 +106,36 @@ public class CommonUtility<T> {
         return decryptedText;
     }
 
-    public Long generateUniqueNumber(){
+    public Long generateUniqueNumber() {
         return System.currentTimeMillis();
     }
 
-    public String getPrefixCustomerId(){
+    public String getPrefixCustomerId() {
         return applicationConfig.getCustomerIdPrefix().concat(getDate(new Timestamp(System.currentTimeMillis())));
     }
 
     public String getDate(Timestamp timestamp) {
-       return timestamp.toString().split(" ")[0].replace("-","");
+        return timestamp.toString().split(" ")[0].replace("-", "");
+    }
+
+
+    public ServerResponse getErrors(BindingResult result) {
+        ServerResponse serverResponse = new ServerResponse();
+        serverResponse.setCode(GeneralConstants.SUCCESS_CODE);
+        if (result.hasErrors()) {
+            ObjectError error = result.getAllErrors().get(0);
+            serverResponse.setMessage(error.getDefaultMessage());
+            serverResponse.setCode(GeneralConstants.FAILURE_CODE);
+            logger.info(" Validation Error and Server Response " + gson.toJson(serverResponse));
+            return serverResponse;
+        }
+        return serverResponse;
+    }
+
+    public boolean isSessionActive(){
+        if(httpServletRequest.getSession().getAttribute(GeneralConstants.LOGGED_IN_OBJECT_KEY) == null){
+            return false;
+        }
+        return true;
     }
 }

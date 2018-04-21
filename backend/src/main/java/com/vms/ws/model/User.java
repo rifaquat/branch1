@@ -19,13 +19,18 @@ public class User extends BaseEntity {
     @Length(max = 50, message = "username max length is 50")
     @NotEmpty
     @Column(name="username",unique = true, nullable = false)
-    @UniqueUserName(service = UserService.class , message = "user.name.exists")
+    @UniqueUserName(service = UserService.class , message = "username already exists")
     private String username;
 
     @JsonIgnore
     @Column(name="password")
     private String password;
 
+    @NotNull(message = "Enter FirstName")
+    private String firstName;
+
+    @NotNull(message = "Enter LastName")
+    private String lastName;
     /*@JsonIgnore*/
     /*@NotNull*/
     @JsonIgnore
@@ -45,18 +50,17 @@ public class User extends BaseEntity {
     @Valid
     private Role role;
 
-    @Pattern(regexp = "^[a-zA-Z0-9 ]*$", message = "invalid.name.text")
+    @Pattern(regexp = "^[a-zA-Z0-9 ]*$", message = "vehicleNumber cannot be empty")
     @NotNull(message = "empty.name.text")
     @Column(name = "vehicle_number")
     private String vehicleNumber;
 
-    @Pattern(regexp = "^[a-zA-Z0-9 ]*$", message = "invalid.name.text")
+    @Pattern(regexp = "^[a-zA-Z0-9 ]*$", message = "primaryContactNumber cannot be empty")
     @NotNull(message = "empty.name.text")
     @Column(name = "primary_contact_number")
     private String primaryContactNumber;
 
-    @Pattern(regexp = "^[a-zA-Z0-9 ]*$", message = "invalid.name.text")
-    @NotNull(message = "empty.name.text")
+    @Pattern(regexp = "^[a-zA-Z0-9 ]*$", message = "enter valid secondaryContactNumber")
     @Column(name = "secondary_contact_number")
     private String secondaryContactNumber;
 
@@ -65,6 +69,23 @@ public class User extends BaseEntity {
 
     @Column(name = "nearest_ps_address")
     private String addressNearPS;
+
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
     public String getVehicleNumber() {
         return vehicleNumber;

@@ -62,8 +62,13 @@ public class UserService implements UserNameValidator {
         return userRepository.findOne(id);
     }
 
-    public Page<User> findAll(Pageable pageable) {
-        return userRepository.findAll(pageable);
+
+    public Page<User> findAll(Pageable pageable,List<Long> roles ) {
+        return userRepository.findAll(pageable,roles);
+    }
+
+    public Page<User> findAll(Pageable pageable,String searchBy,List<Long> roles ) {
+        return userRepository.findAll(pageable,searchBy, roles);
     }
 
     public List<User> findAll(Long roleId) {
@@ -72,5 +77,6 @@ public class UserService implements UserNameValidator {
         }
         return userRepository.findAll(roleId);
     }
+
 
 }

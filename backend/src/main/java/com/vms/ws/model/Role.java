@@ -23,7 +23,7 @@ public class Role implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotNull
+    @NotNull(message = "roleId cannot be empty")
     private Long roleId;
 
     @JsonIgnore

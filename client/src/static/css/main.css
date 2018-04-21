@@ -1,0 +1,51 @@
+/* Login Page Css */
+.login{
+    margin: 50px  auto 20px auto;
+    float: none;
+}
+
+/* Monitor Css */
+.main-nav{
+    border-radius: 0;
+    border:none;
+    margin-bottom: 0;
+}
+.main-nav .nav li a.active{
+   background: #0f0f0f !important;
+   color:#FFF;
+}
+.user-info{
+    top:15px;
+}
+
+/* Css Helper */
+.p0{
+ padding: 0 !important;
+}
+.mt{
+    margin-top: 10px !important;
+}
+.pos-rel{
+    position: relative;
+}
+.ph{
+  padding-top: 10px;
+    padding-bottom: 10px;
+}
+.height-500{
+    height: 500px;
+}
+.circle{
+    border-radius: 50%;
+    border: 1px solid #cfcfcf;
+}
+.pv{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.bb{
+    border-bottom: 1px solid #cfcfcf;
+}
+.mb-lg{
+    margin-bottom: 20px;
+}

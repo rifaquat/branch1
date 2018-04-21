@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<app-header></app-header>
+<body>
+  
+<!-- Page Content -->
+<div class="container-fluid">
+  <!-- Marketing Icons Section -->
+  <div class="row pv">
+    <div class="col-sm-8 col-lg-8 col-md-8 mb-lg col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
+      <h4 class="page-header">Player's Personal Information</h4>
+            <div class="col-sm-12 text-center">
+              <table style="width:100%">
+                <tr>
+                  <th>Firstname</th>
+                  <th>Lastname</th> 
+                  <th>Address</th>
+                  <th>mobileNumber</th>
+                  <th>imeiNumber</th>
+                  <th>speciality</th>
+                  <th>Action</th>
+                </tr>
+                <tr *ngFor="let player of playerList">
+                  <td>{{player.firstName}}</td>
+                  <td>{{player.lastName}}</td> 
+                  <td>{{player.address}}</td> 
+                  <td>{{player.mobileNumber}}</td> 
+                  <td>{{player.imeiNumber}}</td> 
+                  <td>{{player.specialty.name}}</td> 
+                  <td><button (click) ="loadPlayerDetails(player.id)">Edit</button></td>
+                </tr>
+              </table>
+              <ul class="nav nav-pills">
+                  <li class="nav-item" *ngFor="let pageNo of pages">
+                     <a class="nav-link" href="#" >{{pageNo}}</a>
+                  </li>
+              </ul>
+        <button class="btn btn-default btn-lg " (click)="newPlayer()">
+          Add
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+
+<app-footer></app-footer>
+
+</html>

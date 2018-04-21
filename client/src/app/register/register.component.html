@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<app-header></app-header>
+<body>
+<div class="container-fluid">
+  <div class="row pv">
+    <div class="col-sm-8 col-lg-8 col-md-8 mb-lg col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
+      <h4 class="page-header">Player's Personal Information</h4>
+        <div>
+          <input type="hidden" [(ngModel)]="playerDetails.playerId" value="" />
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group float-label-control">
+            <label >Player Id</label>
+            <input type="text" class="form-control" maxlength="20" [(ngModel)]="playerDetails.firstName" placeholder="First Name">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group float-label-control">
+            <label >Player Name</label>
+            <input type=" text" class="form-control" maxlength="50" [(ngModel)]="playerDetails.lastName" placeholder="Last Name">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group float-label-control">
+            <label >Age</label>
+            <input type="text" class="form-control" maxlength="10"  [(ngModel)]="playerDetails.dateOfBirth"  placeholder="Age">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group float-label-control">
+            <label >Sex</label>
+            <select [(ngModel)]="playerDetails.gender" class="form-control" >
+              <option value="1" selected>Male</option>
+              <option value="2">Female</option>
+              <option value="3">Others</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <div class="form-group float-label-control">
+            <label >Address</label>
+            <textarea class="form-control" placeholder="Address" [(ngModel)]="playerDetails.address" maxlength="250" rows="1"></textarea>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group float-label-control">
+            <label >Mobile Number 1</label>
+            <input type="text" class="form-control" maxlength="10" [(ngModel)]="playerDetails.mobileNumber" placeholder="Mobile number">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group float-label-control">
+            <label >IMEI Number</label>
+            <input type="text" class="form-control" maxlength="15" [(ngModel)]="playerDetails.imeiNumber" placeholder="IMEI Number">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group float-label-control">
+            <select class="form-control" [(ngModel)]="playerDetails.trait.id">
+              <option value="">Select Trait</option>
+              <option *ngFor="let trait of traitList" [value]="trait.id">{{trait.name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group float-label-control">
+            <select class="form-control" [(ngModel)]="playerDetails.specialty.id">
+              <option value="">Select Specialty</option>
+              <option *ngFor="let specialty of specialtyList" [value]="specialty.id">{{specialty.name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group float-label-control">
+            <select class="form-control" [(ngModel)] = "playerDetails.club.id">
+              <option value="">Register to Club (If Any)</option>
+              <option *ngFor="let club of clubList" [value]="club.id">{{club.name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-12 text-center">
+          <button class="btn btn-default btn-lg " (click)="register()">
+            Save
+          </button>
+          <button class="btn btn-default btn-lg " (click)="cancel()">
+            Cancel
+          </button>
+        </div>
+    </div>
+  </div>
+</div>
+</body>
+<app-footer></app-footer>
+</html>

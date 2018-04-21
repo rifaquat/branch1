@@ -23,6 +23,14 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long> {
 
     User save(User user);
 
+    @Query(value = "SELECT u FROM User u WHERE  (u.vehicleNumber like %:search%  or u.primaryContactNumber like %:search% " +
+            "or u.secondaryContactNumber like %:search% or u.emailId like %:search% or u.firstName like %:search% " +
+            "or u.lastName like %:search% ) and u.deleted=false and u.role.id in (:roles) ")
+    Page<User> findAll(Pageable pageable,@Param("search") String search , @Param("roles") List<Long> roles);
+
+    @Query(value = "SELECT u FROM User u WHERE  u.role.id in (:roles) and u.deleted=false")
+    Page<User> findAll(Pageable pageable,@Param("roles") List<Long> roles);
+
     @Query(nativeQuery = true,value =  "select count(*) from user u where username = :username and u.deleted=false")
     Long countByUsername(@Param("username") String userName);
 
